@@ -5,23 +5,17 @@ import API from "../util/API"
 import { Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button"
 
-function ResultContainer(props) {
 
-    const handleSave = () => {
-        API.saveBook({
-            title: props.title,
-            authors: props.authors,
-            description: props.description,
-            image: props.image,
-            link: props.link
-        })
-        .then(console.log("successfully added a book"))
-        .catch(
-            err => console.error(err)
-        )
-    } 
 
-    return(
+function DBContainer(props) {
+
+    const handleDelete = () => {
+        API.deleteBook(props.id)
+        .then(console.log(`Removed ${props.title}`))
+        .catch(err => console.error(err))
+    }
+
+    return (
         <div style={{
             marginBottom: "20px"
         }}>
@@ -33,14 +27,14 @@ function ResultContainer(props) {
                 <Col>
                     <Button
                         style={{
-                            marginLeft:"10px"
+                            marginRight:"10px"
                         }} 
                         href={props.link}
                         target="_blank"
                     >View</Button>
                     <Button
-                    onClick={handleSave}
-                    >Save</Button>
+                    onClick={handleDelete}
+                    >Delete</Button>
                 </Col>
             </Row>
             <Row>
@@ -51,5 +45,5 @@ function ResultContainer(props) {
     )
 }
 
-export default ResultContainer;
 
+export default DBContainer;

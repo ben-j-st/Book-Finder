@@ -1,6 +1,6 @@
 import React from "react";
 
-import ResultContainer from "../components/resultContainer";
+import SearchContainer from "../components/searchContainer";
 
 import Jumbotron from "react-bootstrap/Jumbotron";
 import { Form } from "react-bootstrap/";
@@ -53,13 +53,13 @@ function SearchPage() {
             {books.length ?  (
                 <Jumbotron>
                     <h4 style={{ textAlign: "left"}}>Results</h4>
-                    {books.map((book) => (
-                        <ResultContainer
+                    {books.map(book => (
+                        <SearchContainer
                             key={book.id} 
                             title={book.volumeInfo.title}
-                            authors={book.volumeInfo.authors}
+                            authors={book.volumeInfo.authors.length > 1 ? "Authors: " + book.volumeInfo.authors : "Author: " + book.volumeInfo.authors}
                             description={book.volumeInfo.description}
-                            image={book.volumeInfo.imageLinks.thumbnail}
+                            image={book.volumeInfo.imageLinks?.thumbnail ?? `http://via.placeholder.com/128x197?text=${book.volumeInfo.title}`}
                             link={book.volumeInfo.previewLink}
                         />
                     ))}
