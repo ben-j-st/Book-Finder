@@ -45,7 +45,7 @@ function SearchPage() {
                         type="text"
                         value={input}
                         onChange={e => setInput(e.target.value)} 
-                        placeholder="Please Enter A Book Title" 
+                        placeholder="Please Enter A Book Title Or Authors Name" 
                     />
                     <Button 
                         style={{
