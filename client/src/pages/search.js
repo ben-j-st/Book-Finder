@@ -1,6 +1,6 @@
 import React from "react";
 
-import SearchContainer from "../components/searchContainer";
+import SearchContainer from "../components/container";
 
 import Jumbotron from "react-bootstrap/Jumbotron";
 import { Form } from "react-bootstrap/";
@@ -15,11 +15,20 @@ function SearchPage() {
 
     const runSearch = event => {
         event.preventDefault();
-        API.searchBooks(input)
-        .then(res => {
-            console.log(res.data.items)
-            setBooks(res.data.items)
-        })
+        if(input.length > 0) {
+            API.searchBooks(input)
+            .then(res => {
+                if(res.data.totalItems === 0) {
+                    setBooks([])
+                } else {
+                    console.log(res)
+                setBooks(res.data.items)
+                setInput("")
+                }
+            })
+        } else {
+            return
+        }
     }
 
     return (
@@ -57,7 +66,7 @@ function SearchPage() {
                         <SearchContainer
                             key={book.id} 
                             title={book.volumeInfo.title}
-                            authors={book.volumeInfo.authors.length > 1 ? "Authors: " + book.volumeInfo.authors : "Author: " + book.volumeInfo.authors}
+                            authors={book.volumeInfo.authors?.length > 1 ? "Authors: " + book.volumeInfo.authors : "Author: " + book.volumeInfo.authors}
                             description={book.volumeInfo.description}
                             image={book.volumeInfo.imageLinks?.thumbnail ?? `http://via.placeholder.com/128x197?text=${book.volumeInfo.title}`}
                             link={book.volumeInfo.previewLink}

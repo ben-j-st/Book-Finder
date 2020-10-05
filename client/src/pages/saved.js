@@ -1,7 +1,7 @@
 import React from "react";
 
 import API from "../util/API";
-import DBContainer from "../components/dbContainer"
+import DBContainer from "../components/container"
 
 import Jumbotron from "react-bootstrap/Jumbotron";
 
@@ -9,14 +9,18 @@ function SavedPage() {
 
     const [ dbBooks, setDBBooks] = React.useState([])
 
-    React.useEffect(() => {
+    const getBooks = () => {
         API.getBooks()
         .then(res => {
             // console.log(res.data)
             setDBBooks(res.data)
         })
         .catch(err => console.error(err))
-    },[])
+    }
+
+    React.useEffect(() => {
+        getBooks();
+    }, [])
 
     
 
@@ -34,6 +38,7 @@ function SavedPage() {
                         description={book.description}
                         image={book.image}
                         link={book.link}
+                        getBooks={getBooks}
                     />
                 ))}
             </Jumbotron>

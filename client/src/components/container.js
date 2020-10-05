@@ -5,24 +5,40 @@ import API from "../util/API"
 import { Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button"
 
+function Container(props) {
 
-
-function DBContainer(props) {
+    const handleSave = () => {
+        API.saveBook({
+            title: props.title,
+            authors: props.authors,
+            description: props.description,
+            image: props.image,
+            link: props.link
+        })
+        .then(console.log("successfully added a book"))
+        .catch(
+            err => console.error(err)
+        )
+    } 
 
     const handleDelete = () => {
         API.deleteBook(props.id)
-        .then(console.log(`Removed ${props.title}`))
+        .then( () => {
+            console.log(`Removed ${props.title}`)
+            props.getBooks()
+        })
         .catch(err => console.error(err))
     }
 
-    return (
+
+    return(
         <div style={{
             marginBottom: "20px"
         }}>
             <Row>
                 <Col>
                     <h4>{props.title}</h4>
-                    <p>Author/s: {[props.authors].flat().join(", ")}</p>
+                    <p>{[props.authors].flat().join(", ")}</p>
                 </Col>
                 <Col>
                     <Button
@@ -32,9 +48,15 @@ function DBContainer(props) {
                         href={props.link}
                         target="_blank"
                     >View</Button>
-                    <Button
-                    onClick={handleDelete}
-                    >Delete</Button>
+                    {!props.id ? 
+                        <Button
+                            onClick={handleSave}
+                        >Save</Button>
+                        :
+                        <Button
+                            onClick={handleDelete}
+                        >Delete</Button>
+                    }  
                 </Col>
             </Row>
             <Row>
@@ -46,4 +68,4 @@ function DBContainer(props) {
 }
 
 
-export default DBContainer;
+export default Container;
