@@ -16,8 +16,8 @@ function nav() {
         <Navbar bg="light" variant="light">
             <Navbar.Brand href="#home">Google Books</Navbar.Brand>
             <Nav className="mr-auto">
-                <Link exact path="/" style={style} >Search</Link>
-                <Link exact path="/saved" style={style}>Saved</Link>
+                <Link to="/" style={style} >Search</Link>
+                <Link to="/saved" style={style}>Saved</Link>
             </Nav>
         </Navbar>
     )
