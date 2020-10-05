@@ -9,7 +9,7 @@ A React based app to interact with the google books api, to search for / save yo
 
 ## Links
 
-<a href="https://fast-coast-34270.herokuapp.com/">React Profile/a>
+<a href="https://fast-coast-34270.herokuapp.com/">React Profile</a>
 <a href="https://young-badlands-09256.herokuapp.com/">Live React Version</a>
 
 
