@@ -10,7 +10,7 @@ export default {
     return axios.get("/api/books");
   },
   // Gets the book based on user search
-  getBook: (query) => {
+  searchBooks: (query) => {
     return axios.get(BaseUrl + query);
   },
   // Deletes the book with the given id
